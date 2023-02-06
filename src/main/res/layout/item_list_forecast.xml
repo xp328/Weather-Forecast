@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:elevation="60dp"
+    >
+
+    <TextView
+        android:id="@+id/itemForecastTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11月23日"
+        android:textSize="22sp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/itemForecastDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="22sp"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:id="@+id/itemForecastImage"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:src="@drawable/ic_hail"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/itemForecastText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="多云"
+        android:textSize="30sp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/itemForecastLow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="30°C"
+        android:textSize="25sp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/itemForecastHigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="19°C"
+        android:textSize="25sp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
