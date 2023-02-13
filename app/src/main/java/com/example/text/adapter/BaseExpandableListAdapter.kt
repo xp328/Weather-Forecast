@@ -1,27 +1,17 @@
 package com.example.text.adapter
 
-import android.content.ClipData.Item
-import android.content.Context
+
 import android.database.DataSetObserver
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseExpandableListAdapter
 import android.widget.ExpandableListAdapter
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.example.text.R
-import com.example.text.databinding.FragmentAddBinding
 import com.example.text.databinding.ItemExlistGroupBinding
 import com.example.text.databinding.ItemExlistItemBinding
-import com.example.text.databinding.ItemListMoreBinding
-import java.security.acl.Group
-import kotlin.random.Random
 
 
-class ExpandableListViewAdapter(var group: List<String>, var child: ArrayList<ArrayList<String>>)
+
+class ExpandableListViewAdapter(var group: List<String>, var child: ArrayList<List<String>>)
     :ExpandableListAdapter {
 
 
@@ -29,18 +19,20 @@ class ExpandableListViewAdapter(var group: List<String>, var child: ArrayList<Ar
 
     override fun unregisterDataSetObserver(observer: DataSetObserver?) {}
 
+    //设置一级列表的数量
     override fun getGroupCount(): Int {
-//        Log.d("addAdapter------","${child}")
         return group.size }
 
+    //设置二级列表的数量
     override fun getChildrenCount(groupPosition: Int): Int {
-//        Log.d("addAdapter","${child.size}")
         return child[groupPosition].size
-//        TODO("Not yet implemented")
     }
 
+    //设置具体的一级列表省名
     override fun getGroup(groupPosition: Int): Any { return group[groupPosition] }
 
+
+    //设置具体的二级列表城市名
     override fun getChild(groupPosition: Int, childPosition: Int): Any {
         return child[childPosition]
     }
@@ -54,12 +46,14 @@ class ExpandableListViewAdapter(var group: List<String>, var child: ArrayList<Ar
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?,
                               parent: ViewGroup?): View {
 
+        //判断是否缓存，执行对应操作
         val bd: ItemExlistGroupBinding = if (convertView != null) {
             ItemExlistGroupBinding.bind(convertView)
         } else {
             ItemExlistGroupBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
         }
 
+        //设置一级列表数据
         bd.tvGroup.text = group[groupPosition]
 
         return bd.root
@@ -69,6 +63,7 @@ class ExpandableListViewAdapter(var group: List<String>, var child: ArrayList<Ar
                               convertView: View?, parent: ViewGroup?): View {
 
 
+
         val bd: ItemExlistItemBinding = if (convertView != null) {
             ItemExlistItemBinding.bind(convertView)
         } else {
@@ -76,7 +71,7 @@ class ExpandableListViewAdapter(var group: List<String>, var child: ArrayList<Ar
                 parent, false)
         }
 
-        Log.d("TAG", childPosition.toString())
+        //设置二级列表的数据
         bd.tvChild.text = child[groupPosition][childPosition]
 
         return bd.root

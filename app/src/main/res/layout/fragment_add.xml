@@ -6,31 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.AddFragment">
 
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<!--
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fAddProvince"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fAddCities"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
--->
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+<!-- 标题   -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="56dp"
@@ -43,6 +27,7 @@
         android:textSize="20sp"
         tools:ignore="MissingConstraints" />
 
+<!--  显示选择的城市  -->
     <TextView
         android:id="@+id/iAddNextText"
         android:layout_width="wrap_content"
@@ -56,7 +41,7 @@
         tools:ignore="MissingConstraints" />
 </LinearLayout>
 
-
+<!--可折叠列表-->
     <ExpandableListView
         android:id="@+id/expandable_list"
         android:layout_width="match_parent"
@@ -64,6 +49,7 @@
 
 </LinearLayout>
 
+<!--  添加按钮  -->
     <Button
         android:id="@+id/iAddButton"
         android:layout_width="match_parent"

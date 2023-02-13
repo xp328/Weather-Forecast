@@ -7,12 +7,9 @@ import com.example.text.network.MyApiResponseEntity
 import com.example.text.network.OkHttpUtils
 import com.example.text.network.UserWeather
 import com.google.gson.Gson
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.*
 import okhttp3.FormBody
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 

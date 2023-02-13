@@ -1,7 +1,6 @@
 package com.example.text.fragment
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,35 +8,57 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.text.R
 import com.example.text.adapter.ForecastAdapter
 import com.example.text.databinding.FragmentForecastBinding
 import com.example.text.network.*
+import com.example.text.network.OkHttpUtils.BASE_URL
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.*
-import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLConnection
+import java.lang.Exception
 import kotlin.properties.Delegates
 
-private const val uriString = "http://175.178.70.219:8083/api/place/province"
-@RequiresApi(Build.VERSION_CODES.O)
+private const val uriString = "http://$BASE_URL/api/place/province"
+private const val TAG = "ForecastFragment"
+
 class ForecastFragment : Fragment() {
 
     private var _bd: FragmentForecastBinding? = null
     private val bd: FragmentForecastBinding get() = _bd!!
 
+    private fun getCitiesData(provinceNames: String){
+        val citiesUriString = "http://$BASE_URL/api/place/cities?province=$provinceNames"
 
-    //获取API
-    //第一个页面的init方法 确保应用一开始就获取省名
-    init {
+        val responses = OkHttpUtils.handle(citiesUriString, OkHttpUtils.GET, null)
+        if (responses.code == 200) {
+            val responseBodyString = responses.body?.string() //buyaoyong toString()
+            val gson = Gson()
+            val responseData: MyApiResponseEntity<List<String>> = gson.fromJson(
+                responseBodyString,
+                object : TypeToken<MyApiResponseEntity<List<String>>>() {}.type
+            )
+            //保存单个省份的城市名集合
+            citiesNameList = responseData.data
+            //添加到总的省份城市名集合中
+            allCitiesNameArray.add(citiesNameList)
+            Log.d("TagCities","$allCitiesNameArray")
+
+        }else{
+            val responseBodyString = responses.body?.string()
+            Log.e("TEST", "CoroutineError: $responseBodyString" )
+        }
+    }
+
+
+    //获取API GET
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         lifecycleScope.launch(context = Dispatchers.IO) {
+            try {
                 val response = OkHttpUtils.handle(uriString, OkHttpUtils.GET, null)
                 if (response.code == 200) {
                     val responseBodyString = response.body?.string() //buyaoyong toString()
@@ -46,45 +67,20 @@ class ForecastFragment : Fragment() {
                         responseBodyString,
                         object : TypeToken<MyApiResponseEntity<List<String>>>() {}.type
                     )
+                    //获取省份
                     provinceNameList = responseData.data
                     provinceNameList.forEach {
                         getCitiesData(it)
                     }
+                    Log.d("TagProvince","$provinceNameList")
                 }else{
                     val responseBodyString = response.body?.string()
-                    Log.e("TEST", "CoroutineError: ${responseBodyString}" )
+                    Log.e("TEST", "CoroutineError: $responseBodyString" )
                 }
-        }
-    }
-
-    @OptIn(DelicateCoroutinesApi::class)
-    fun getCitiesData(provinceNames: String) {
-        var conn: HttpURLConnection? = null
-        var citiesUriString = "http://175.178.70.219:8083/api/place/cities?province=$provinceNames"
-        var temp = provinceNames
-
-        GlobalScope.async {
-            //再循环 确保按顺序
-            provinceNameList.forEach {
-                conn = URL(citiesUriString).openConnection() as HttpURLConnection
-                conn!!.connect()
-                conn!!.inputStream.use { input ->
-                    //在use里执行的顺序会混乱 通过if判断
-                    if (it == temp) {
-                        Log.d("ITTEMP","$it----$temp")
-                        var data = input.bufferedReader().readText()
-                        var jsonDecode = Gson().fromJson(data, Person::class.java)
-                        citiesNameList = jsonDecode.data
-                        tempArray.add(citiesNameList)
-                    }
-                }
+            } catch (e:Exception){
+                Log.e(TAG, "Error: "    ,e )
             }
-
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -109,7 +105,8 @@ class ForecastFragment : Fragment() {
 
 
         //设置7日温度RecyclerView对应的Adapter
-        var ForecastAdapter = ForecastAdapter()
+        val ForecastAdapter = ForecastAdapter()
+
         //通过sevenDaysWeather：map里到key值拿对应的7日温度数据
         ForecastAdapter.submitList(sevenDaysWeather[wListData[0].text]!!)
         bd.fForeRecyclerView.adapter = ForecastAdapter
@@ -119,7 +116,7 @@ class ForecastFragment : Fragment() {
 
     //将按钮的层级调高
     private fun adjustButton(button: Button) {
-        var params = button.layoutParams
+        val params = button.layoutParams
         bd.fForeConstraintLayout.removeView(button)
         bd.fForeConstraintLayout.addView(button, params)
     }
@@ -134,15 +131,25 @@ class ForecastFragment : Fragment() {
             findNavController().navigate(R.id.action_forecastFragment_to_moreFragment)
         }
 
+        //用于切换页面时获取数字
         var number = 0
 
+        //获取对应页面摄氏度
+        var temperatureOrigin = wListData[number].temperature.toInt()
+
+
         val fTabOnClickListener = View.OnClickListener { p0 ->
+            //点击对应的页面更改number
             when(p0?.id){
                 bd.fForeCityButton.id -> number = 0
                 bd.fForeCityButtonTwo.id -> number = 1
                 bd.fForeCityButtonThree.id -> number = 2
             }
+            //将更改的数字传入setfragmentData函数
             setfragmentData(number)
+
+            //点击页面的时候把temperatureOrigin更新
+            temperatureOrigin = wListData[number].temperature.toInt()
         }
 
         bd.fForeCityButton.setOnClickListener(fTabOnClickListener)
@@ -151,10 +158,10 @@ class ForecastFragment : Fragment() {
 
 
 
-        val temperatureOrigin = wListData[number].temperature.toInt()
+        //摄氏度和华氏度切换
         var isFahrenheit: Boolean by Delegates.observable(false) {
-                _, oldValue, newValue ->
-            if (newValue == false) bd.fForeTemperature.text = temperatureOrigin.toString()
+                _, _, newValue ->
+            if (!newValue) bd.fForeTemperature.text = temperatureOrigin.toString()
             else {
                 val fah = (temperatureOrigin * 9 / 5) + 32
                 bd.fForeTemperature.text = fah.toString()
@@ -172,6 +179,7 @@ class ForecastFragment : Fragment() {
         }
     }
 
+    //根据传入的数字 设置数据
     private fun setfragmentData(number: Int) {
         bd.fForeCityText.text = wListData[number].text
         bd.fForeTemperature.text = wListData[number].temperature

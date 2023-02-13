@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.text.databinding.ItemListForecastBinding
-import com.example.text.network.FListData
-import com.example.text.network.ForecastWeather
 import com.example.text.network.UserSevenDaysWeatherInt
 import com.example.text.network.weatherImage
 import java.text.SimpleDateFormat
@@ -48,6 +46,7 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastHolder>() {
         val formatter = DateTimeFormatter.ofPattern("MM月dd日")
         val formatted = current.format(formatter)
 
+        //7日数据添加
         val sevenDaysCalendar = listOf<Calendar>(
             Calendar.getInstance(),
             Calendar.getInstance().apply { add(Calendar.DATE,1) },
@@ -58,17 +57,9 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastHolder>() {
             Calendar.getInstance().apply { add(Calendar.DATE,6) },
         )
         val simpleFormatter = SimpleDateFormat("MM月dd日",Locale.CHINA)
-        //7日数据添加
-        var weatherDatas = listOf(
-            simpleFormatter.format(sevenDaysCalendar[0].time),
-            "11月24日",
-            "11月25日",
-            "11月26日",
-            "11月27日",
-            "11月28日",
-            "11月29日",
-        )//日期集合
 
+
+        //设置页面对应对数据
         holder.bd.itemForecastTime.text = simpleFormatter.format(sevenDaysCalendar[position].time)
         if (position == 0) {
             holder.bd.itemForecastDate.text = "今日"

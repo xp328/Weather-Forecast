@@ -14,6 +14,7 @@
         android:paddingTop="20dp"
         android:orientation="vertical">
 
+<!--    返回按钮    -->
         <ImageButton
             android:id="@+id/fMoreImageButton"
             android:layout_width="wrap_content"
@@ -27,6 +28,7 @@
             android:background="@color/tr"
             tools:ignore="MissingConstraints" />
 
+<!--   已添加城市列表 RecyclerView    -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fMoreRecyclerView"
             android:layout_width="match_parent"
@@ -36,6 +38,7 @@
             android:layout_marginTop="15dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
+<!--   添加页跳转按钮     -->
         <ImageButton
             android:id="@+id/fMoreButton"
             android:layout_width="match_parent"

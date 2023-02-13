@@ -12,6 +12,7 @@
         android:padding="20dp"
         tools:ignore="MissingConstraints">
 
+<!--    城市名    -->
         <TextView
             android:id="@+id/iMoreText"
             android:layout_width="wrap_content"
@@ -21,6 +22,7 @@
             android:textStyle="bold"
             android:layout_weight="0.5"/>
 
+<!--    温度    -->
         <TextView
             android:id="@+id/iMoreTemperature"
             android:layout_width="wrap_content"
@@ -30,6 +32,7 @@
             android:layout_weight="1"
             />
 
+<!--    天气    -->
         <TextView
             android:id="@+id/iMoreWeather"
             android:layout_width="wrap_content"
@@ -41,6 +44,7 @@
             android:textAlignment="textEnd"
             />
 
+<!--    天气图标    -->
         <ImageView
             android:id="@+id/iMoreImage"
             android:layout_width="60dp"
@@ -48,6 +52,7 @@
             android:paddingEnd="20dp"
             app:srcCompat="@drawable/ic_cloudy" />
 
+<!--    拖拽图片    -->
         <ImageView
             android:id="@+id/iMoreMenu"
             android:layout_width="20dp"

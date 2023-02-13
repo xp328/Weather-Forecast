@@ -1,4 +1,5 @@
 package com.example.text.network
+
 //根据api结构第一级的模型类
 class Person {
     val code : Int

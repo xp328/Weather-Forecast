@@ -14,6 +14,7 @@
             android:id="@+id/action_forecastFragment_to_moreFragment"
             app:destination="@id/moreFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/moreFragment"
         android:name="com.example.text.fragment.MoreFragment"
@@ -26,6 +27,7 @@
             android:id="@+id/action_moreFragment_to_addFragment"
             app:destination="@id/addFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/addFragment"
         android:name="com.example.text.fragment.AddFragment"

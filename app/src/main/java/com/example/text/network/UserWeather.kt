@@ -29,6 +29,7 @@ class UserWeather {
     }
 }
 
+
 class UserSevenDaysWeatherInt {
     val weatherType : String
     val temperatureRange: UserTemperatureRange

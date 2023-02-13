@@ -19,6 +19,7 @@
             android:scrollbars="vertical"
             android:layout_height="wrap_content">
 
+<!--    左上角第一个按钮        -->
             <Button
                 android:id="@+id/fForeCityButton"
                 android:layout_width="wrap_content"
@@ -30,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
-
+<!--    左上角第二个按钮        -->
             <Button
                 android:id="@+id/fForeCityButtonTwo"
                 android:layout_width="wrap_content"
@@ -44,6 +45,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
+
+<!--    左上角第三个按钮        -->
             <Button
                 android:id="@+id/fForeCityButtonThree"
                 android:layout_width="wrap_content"
@@ -57,6 +60,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
+<!--    右上角更多按钮        -->
             <Button
                 android:id="@+id/fForeMoreButton"
                 android:layout_width="wrap_content"
@@ -82,6 +86,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
 
+<!--    城市名        -->
             <TextView
                 android:id="@+id/fForeCityText"
                 android:layout_width="wrap_content"
@@ -93,6 +98,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fForeCityButton" />
 
+<!--    温度数字        -->
             <TextView
                 android:id="@+id/fForeTemperature"
                 android:layout_width="wrap_content"
@@ -103,6 +109,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fForeCityText" />
 
+<!--    华氏度        -->
             <TextView
                 android:id="@+id/fForeFahrenheit"
                 android:layout_width="wrap_content"
@@ -114,6 +121,7 @@
                 app:layout_constraintStart_toEndOf="@id/fForeTemperature"
                 app:layout_constraintTop_toBottomOf="@id/fForeCityButtonTwo" />
 
+<!--    摄氏度        -->
             <TextView
                 android:id="@+id/fForeCentigrade"
                 android:layout_width="wrap_content"
@@ -124,6 +132,7 @@
                 app:layout_constraintStart_toEndOf="@id/fForeTemperature"
                 app:layout_constraintTop_toBottomOf="@id/fForeFahrenheit" />
 
+<!--    天气图标        -->
             <ImageView
                 android:id="@+id/fForeImageView"
                 android:layout_width="wrap_content"
@@ -134,6 +143,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fForeCityButtonThree" />
 
+<!--    7日天气        -->
             <TextView
                 android:id="@+id/fForeWeatherText"
                 android:layout_width="wrap_content"
@@ -145,6 +155,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fForeTemperature" />
 
+<!--    7日天气RecyclerView 动态列表      -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fForeRecyclerView"
                 android:layout_width="match_parent"
@@ -159,10 +170,10 @@
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="200dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="15dp"
-                android:background="#fff000"
+                android:background="@color/forecast_buttonOne_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fForeRecyclerView" />
 
