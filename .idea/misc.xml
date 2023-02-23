@@ -28,13 +28,14 @@
         <entry key="app/src/main/res/drawable/ic_thunder_storm.xml" value="0.2165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11651469098277609" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.11651469098277609" />
-        <entry key="app/src/main/res/layout/fragment_forecast.xml" value="0.11651469098277609" />
+        <entry key="app/src/main/res/layout/fragment_forecast.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.11651469098277609" />
         <entry key="app/src/main/res/layout/item_exlist_group.xml" value="0.11651469098277609" />
         <entry key="app/src/main/res/layout/item_exlist_item.xml" value="0.11651469098277609" />
         <entry key="app/src/main/res/layout/item_list_add.xml" value="0.11651469098277609" />
         <entry key="app/src/main/res/layout/item_list_forecast.xml" value="0.11651469098277609" />
         <entry key="app/src/main/res/layout/item_list_more.xml" value="0.11651469098277609" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2155" />
       </map>
     </option>
   </component>
